@@ -34,7 +34,7 @@ def main(path):
     os.mkdir(loc_folder)
     with open(path, 'r') as inFile:
         queries_videos = json.load(inFile)
-        for qv in queries_videos[:5]:
+        for qv in queries_videos:
             query_folder = list(qv.keys())[0]
             links = list(qv.values())[0]
             new_path = f'{loc_folder}/{query_folder}'
