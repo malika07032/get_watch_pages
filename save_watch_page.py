@@ -21,6 +21,7 @@ desired_cap = chrome_options.to_capabilities()
 def get_watchpage(links, loc, query):
     for link in links:
         if link.split('.com//')[1].startswith('watch'):
+            print(link)
             driver.get(link)
             sleep(3)
             result_html = driver.page_source
