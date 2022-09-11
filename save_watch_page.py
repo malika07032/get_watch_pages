@@ -26,7 +26,8 @@ def get_watchpage(links, loc, query):
             sleep(3)
             result_html = driver.page_source
             filename = link.split('?')[1]
-            with open(f'{loc}/{query}/{filename}.html', 'w') as result_file:
+            filepath = loc+'/'+query+'/'+filename+'.html'
+            with open(filepath, 'w') as result_file:
                 result_file.write(result_html)
 
 def main(path):
