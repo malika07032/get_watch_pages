@@ -39,7 +39,7 @@ def main(path):
         for qv in queries_videos:
             query_folder = list(qv.keys())[0]
             links = list(qv.values())[0]
-            new_path = f'{loc_folder}/{query_folder}'
+            new_path = loc_folder+'/'+query_folder
             os.mkdir(new_path)
             get_watchpage(links, loc_folder, query_folder)
     driver.close()
