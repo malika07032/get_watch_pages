@@ -40,7 +40,10 @@ def main(path):
             query_folder = list(qv.keys())[0]
             links = list(qv.values())[0]
             new_path = loc_folder+'/'+query_folder
-            os.mkdir(new_path)
+            try:
+                os.mkdir(new_path)
+            except:
+                print("Exists: ", new_path)
             get_watchpage(links, loc_folder, query_folder)
     driver.close()
 
