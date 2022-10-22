@@ -18,33 +18,26 @@ driver = webdriver.Chrome(executable_path='driver/chromedriver',chrome_options=c
 
 desired_cap = chrome_options.to_capabilities()
 
-def get_watchpage(links, loc, query):
-    for link in links:
-        if link.split('.com//')[1].startswith('watch'):
-            print(link)
-            driver.get(link)
-            sleep(3)
-            result_html = driver.page_source
-            filename = link.split('?')[1]
-            filepath = loc+'/'+query+'/'+filename+'.html'
-            with open(filepath, 'w') as result_file:
-                result_file.write(result_html)
+def get_watchpage(link, loc, query):
+    if link.split('.com//')[1].startswith('watch'):
+        print(link)
+        driver.get(link)
+        sleep(3)
+        result_html = driver.page_source
+        filename = link.split('?')[1]
+        filepath = loc+'/'+query+'/'+filename+'.html'
+        with open(filepath, 'w') as result_file:
+            result_file.write(result_html)
 
 def main(path):
     #path = f'iowa_zone_a_videos.json'
     loc_folder = path.split('.json')[0]
     os.mkdir(loc_folder)
     with open(path, 'r') as inFile:
-        queries_videos = json.load(inFile)
-        for qv in queries_videos:
-            query_folder = list(qv.keys())[0]
-            links = list(qv.values())[0]
-            new_path = loc_folder+'/'+query_folder
-            try:
-                os.mkdir(new_path)
-            except:
-                print("Exists: ", new_path)
-            get_watchpage(links, loc_folder, query_folder)
+        video_links = json.load(inFile)
+        for i, link in enumerate(links):
+            sleep(7)
+            get_watchpage(links, loc_folder)
     driver.close()
 
 if __name__ == "__main__":
