@@ -18,14 +18,14 @@ driver = webdriver.Chrome(executable_path='driver/chromedriver',chrome_options=c
 
 desired_cap = chrome_options.to_capabilities()
 
-def get_watchpage(link, loc, query):
+def get_watchpage(link, loc):
     if link.split('.com//')[1].startswith('watch'):
         print(link)
         driver.get(link)
         sleep(3)
         result_html = driver.page_source
         filename = link.split('?')[1]
-        filepath = loc+'/'+query+'/'+filename+'.html'
+        filepath = loc+'/'+filename+'.html'
         with open(filepath, 'w') as result_file:
             result_file.write(result_html)
 
@@ -36,8 +36,11 @@ def main(path):
     with open(path, 'r') as inFile:
         video_links = json.load(inFile)
         for i, link in enumerate(links):
-            sleep(7)
-            get_watchpage(links, loc_folder)
+            if i!=0 and i%15==0:
+                sleep(15*60)
+            else:
+                sleep(7)
+                get_watchpage(links, loc_folder)
     driver.close()
 
 if __name__ == "__main__":
